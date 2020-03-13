@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptID" language="groovy" pageWidth="242" pageHeight="153" orientation="Landscape" columnWidth="242" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PHOTOPATH" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM IDForPrintTBL]]>
+	</queryString>
+	<field name="memberID" class="java.lang.Long"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="date" class="java.sql.Timestamp"/>
+	<field name="type" class="java.lang.String"/>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="153" splitType="Stretch">
+			<rectangle>
+				<reportElement x="161" y="43" width="71" height="71" forecolor="#FFCC33"/>
+			</rectangle>
+			<textField>
+				<reportElement x="7" y="55" width="154" height="11" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="73" width="154" height="11" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="91" width="100" height="11" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="7" y="109" width="100" height="11" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement mode="Transparent" x="161" y="43" width="75" height="71" forecolor="#0099CC"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{PHOTOPATH} + $F{memberID} +".jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="161" y="129" width="75" height="16" forecolor="#000000"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{memberID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="48" width="25" height="7" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<text><![CDATA[NAME:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="66" width="47" height="7" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<text><![CDATA[ADDRESS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="84" width="62" height="7" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<text><![CDATA[MEMBERSHIP TYPE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="102" width="47" height="7" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<text><![CDATA[DATE APPROVED:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="123" width="73" height="7" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<text><![CDATA[MEMBERSHIP ID NO.;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="3" width="242" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NEGROS ORIENTAL ELECTRIC COOPERATIVE I, INC.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="25" width="242" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MEMBERSHIP IDENTIFICATION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="12" width="230" height="7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bindoy, Negros Oriental]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="120" width="62" height="7" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+		</band>
+		<band height="153" splitType="Immediate">
+			<staticText>
+				<reportElement x="7" y="15" width="230" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NON-TRANSFERABLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="51" width="210" height="41"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[This is to certify that the bearer of this whose name, picture and signature appear herein is a bonifide member-consumer of NEGROS ORIENTAL ELECTRIC COOPERATIVE I, INC., Bindoy Negros Oriental.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="114" width="100" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANITO A. MERCADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="125" width="100" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[President, NORECO I]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="146" width="233" height="6"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<text><![CDATA[If found, please return, contact or email our main office/Tel.No.405-3009/noreco1@yahoo.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="0" width="230" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

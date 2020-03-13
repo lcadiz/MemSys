@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptConnectOrderPerDistrict" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="23ce39fe-6f17-47dc-ade1-1dff30c255af">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="towncode" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select TransDate, AcctNo, AcctName, AcctAddress from conntbl where TownCode=$P{towncode} and acctname<>'NULL' group by TransDate, AcctNo, AcctName, AcctAddress ORDER BY acctname]]>
+	</queryString>
+	<field name="TransDate" class="java.sql.Timestamp"/>
+	<field name="AcctNo" class="java.lang.Integer"/>
+	<field name="AcctName" class="java.lang.String"/>
+	<field name="AcctAddress" class="java.lang.String"/>
+	<variable name="count" class="java.lang.Integer" incrementType="Report" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{AcctNo}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="77" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="fc21a443-e0a7-4576-b1f5-3662b5c83fb2" x="0" y="30" width="572" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Connect Order Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dfed1a9d-cab6-4903-aec8-ce4fdc60942d" x="0" y="0" width="571" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NEGROS ORIENTAL ELECTRIC COOPERATIVE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8350c49e-1612-4802-944d-1e3630da1a1d" x="1" y="12" width="571" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bindoy, Negros Oriental]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c38783bd-ca36-4f28-96aa-da7ec27004d2" x="1" y="50" width="570" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a929b603-fbeb-447a-bdfe-15b7407dccba" x="22" y="1" width="70" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TransDate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="72b5556d-8556-4e85-9c17-bcc84fb47066" x="180" y="0" width="192" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consumer Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="89f81fbe-2e61-44da-9a94-97dab631d591" x="372" y="0" width="199" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="d20e8d7e-7ef3-4fa7-94ef-abf2376c0d55" x="0" y="26" width="571" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="e2236dac-8b8d-4856-8802-2502154bf6a2" x="92" y="1" width="88" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AcctNo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d8b3d195-ec09-4781-9a5b-beae7d4747d4" x="0" y="1" width="22" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement uuid="f86cda96-5c62-4387-9fd2-ad3f5825ab02" x="180" y="0" width="192" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{AcctName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement uuid="24c53c0a-0809-443d-8a9f-86cec81d2570" x="22" y="0" width="70" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TransDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="31e7d80f-a7ae-4aa5-aa26-234ee8dacf84" x="372" y="0" width="199" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{AcctAddress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9f865efa-d848-4ece-9678-0560dcd7f8b7" x="92" y="0" width="88" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{AcctNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a4121477-cded-4936-bf10-2d5b9bd73a55" x="0" y="0" width="22" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{count}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="10" splitType="Stretch">
+			<line>
+				<reportElement uuid="5cb5304c-6aeb-4ebe-b0b7-3e67e17d57c9" x="0" y="2" width="571" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PMES-Participant Certificate" language="groovy" pageWidth="612" pageHeight="792" columnWidth="596" leftMargin="8" rightMargin="8" topMargin="13" bottomMargin="8" uuid="19d82b38-a9e2-4af1-a0cd-ea6af97a405a">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="516"/>
+	<property name="ireport.y" value="466"/>
+	<parameter name="batchID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+RTRIM(participantsTBL.part_fname)
++' '+LEFT(participantsTBL.part_mname,1) + '. '+
++' '+RTRIM(participantsTBL.part_lname)
++' '+RTRIM(participantsTBL.part_ext) AS partName,
+'Held at '  + RTRIM(scheduleTBL.sched_venue)+ ', '+ RTRIM(scheduleTBL.sched_address)
++ ' on the ' + LTRIM(STR(DAY(scheduleTBL.sched_date)))
++ 'th Day of ' + DATENAME(MONTH,(CONVERT(char(10), scheduleTBL.sched_date, 101)))
++ ', ' +LTRIM(STR(YEAR(scheduleTBL.sched_date)))
++'.' AS info, partID
+FROM participantsTBL, scheduleTBL
+WHERE participantsTBL.batchID=scheduleTBL.batchID
+AND scheduleTBL.batchID=$P{batchID} AND participantsTBL.print_count=0
+ORDER BY participantsTBL.part_lname, participantsTBL.part_fname]]>
+	</queryString>
+	<field name="partName" class="java.lang.String"/>
+	<field name="info" class="java.lang.String"/>
+	<field name="partID" class="java.lang.Long"/>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="380" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="17" y="9" width="267" height="356" forecolor="#999999" uuid="8e5762b9-46a5-4ce4-bd76-931c42fc7488"/>
+			</rectangle>
+			<image>
+				<reportElement x="29" y="69" width="241" height="266" uuid="d92307b8-adb4-47b2-bd71-d2661618f01d"/>
+				<imageExpression><![CDATA["./rpt\\ORIGINALh.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="17" y="238" width="265" height="77" uuid="b725a35b-da39-49a3-9a41-ef554057fe7c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{info}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="16" y="143" width="266" height="20" uuid="cf817308-60d2-444f-be26-a88e1bd481f8"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="344" width="266" height="16" uuid="5abca997-13f6-423c-8f92-9f9329a1d666"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ISD OIC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="185" width="266" height="43" uuid="8fdfa549-7ec1-4631-80ae-bbf75a53c096"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[has attended the Pre-Membership Orientation Seminar conducted by NEGROS ORIENTAL ELECTRIC COOPERATIVE I, INC.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="328" width="187" height="16" uuid="b4369c43-1671-41c3-8c6a-80ca637c9ccd"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JONAH M. MAXINO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="114" width="152" height="20" uuid="4337b93b-7d35-4399-97ea-1ee38de95689"/>
+				<textElement textAlignment="Center">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[This is to certify that]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="14" width="266" height="20" uuid="8708ef31-e083-45b8-b995-82e8dc96b4f0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NEGROS ORIENTAL ELECTRIC COOPERATIVE I, INC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="55" width="266" height="19" forecolor="#000000" uuid="c28454b8-42d1-488b-a006-ca282300ef55"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CERTIFICATE OF ATTENDANCE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="26" width="266" height="20" uuid="6fe13207-1af0-4de7-8f7d-4298348ee873"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Bindoy Negros Oriental]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="70" width="266" height="19" forecolor="#000000" uuid="3d4ea98c-4e61-42fd-b71e-81b8e8c09904"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[-o0o-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="163" width="197" height="20" uuid="ddd42c07-50fb-4ad1-880a-f667008c97ee"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Participant ID No.: "+$F{partID}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="107" y="293" width="176" height="62" uuid="85df1d1a-ef6e-4477-b66d-5c8706f268a5"/>
+				<imageExpression><![CDATA[".//rpt/signature.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="365" y="9" width="150" height="13" uuid="c18e72a4-d6eb-461c-ac85-28f6c0a11c94"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Checklist of Requirements]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="353" y="19" width="177" height="13" forecolor="#FF0000" uuid="b3d8399a-0f2d-4e53-a06f-e8cc80e57a34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(Mga Dokumento nga kinalanghan)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="47" width="177" height="13" forecolor="#FF0000" uuid="494b137f-24ea-43d3-b94a-ee17407d7c33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(BAG-O NGA KONEKSIYON)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="37" width="150" height="13" uuid="4d9c43d6-91de-45c8-9c23-722e89a4e0fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOR NEW CONNECTION ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="50" width="281" height="64" forecolor="#FF0000" uuid="8254b368-58fb-427a-b7d0-05d039985021"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(PALIHOG UG E- SUBMIT ANG KOMPLETO NGA MGA DOCUMENTO ARON MADALI ANG PAG PROCESS.  DILI DAWATON ANG INYONG PAPELES KON ADUNAY KULANG)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="105" width="281" height="29" uuid="3dae0fb3-58f3-48ac-b315-b2e9726748a7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1) Original copy of the Certificate of Attendance during the Pre-Membership Seminar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="127" width="281" height="29" uuid="04eb9232-9f3c-42ae-be35-1f52aedaddbf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2) Electrical Plan (for above 20 sq.m. only) duly signed and sealed by PEE - 2 copies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="148" width="281" height="29" uuid="c2280048-93ac-460f-82c6-75340bd9f9bf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[3) Sketch Plan ( for below 20 sq.m only) duly signed and sealed by PEE - 2 copies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="171" width="281" height="29" uuid="77e6837c-3f4e-454a-8634-0f93ec3bba3a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[4) Electrical Permit duly approved by the Office of the Building Official and sealed PEE - 2 copies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="188" width="281" height="29" uuid="8008e78c-31e7-47e0-8bfb-250ed9c7358c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[5) Certificate of Final Electrical Inspection - 2 copies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="199" width="281" height="29" uuid="31eeb8e5-a62b-4c52-b18a-56b42f2eb6ef"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[6) Membership Form for Residential Connection]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="215" width="281" height="29" uuid="70560bdd-e5d9-485d-97ba-34be784d70fe"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[7) Contract of Electric Service for Public, Industrial and Commercial Connections only]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="232" width="281" height="29" uuid="40fcac64-3942-4a17-828a-8bbb4b8a4785"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[8) (If BAPA) Approved Membership - 2 copies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="319" y="253" width="264" height="11" uuid="0fee0f1b-c561-4767-9671-7fe1e216402a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(a) 1 copy to be submitted to the BAPA Chairman]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="319" y="263" width="264" height="11" uuid="c58f19fe-e59f-412f-822f-33340ca9c169"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(b) 1 copy to be attached to the Membership Application]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="266" width="281" height="29" uuid="7d182ccc-6cc6-449b-8f35-b193099f7538"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[9) SEP Projects - Original Copy of Brgy. Certification-  3  copies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="283" width="281" height="29" uuid="c7c10035-1011-4816-8aa9-a434e72e9b27"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[10) Notarized Affidavit of Consent from the Lot Owner for the Service Drop Wire  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="300" width="281" height="29" uuid="92f09ad3-66ae-41e3-b761-afa720784bb3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[11) Notarized Affidavit for SDW more than 100 meters]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="312" width="281" height="29" uuid="18a477d3-f49a-4322-8854-d35f668594b0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[12) Photocopy of Certification of NORECO I Authorized Barangay Electrician]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="4" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptSDWLaborCharges" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="23ce39fe-6f17-47dc-ade1-1dff30c255af">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="from" class="java.util.Date"/>
+	<parameter name="to" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT c.AcctNo, cn.AcctName, cn.AcctAddress, total,  ct.TransDate  FROM costingTBL c
+INNER JOIN CollectionTrans ct ON c.TransID=ct.TransID
+INNER JOIN connTBL cn ON c.AcctNo=cn.AcctNo
+WHERE c.TransID<>'' AND c.COAID=243
+AND CONVERT(char(10), ct.TransDate, 101) BETWEEN $P{from} and $P{to}
+GROUP BY c.cid, c.AcctNo, cn.AcctAddress, c.total, ct.TransDate, cn.AcctName ORDER BY ct.TransDate  ]]>
+	</queryString>
+	<field name="AcctNo" class="java.lang.Integer"/>
+	<field name="AcctName" class="java.lang.String"/>
+	<field name="AcctAddress" class="java.lang.String"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<field name="TransDate" class="java.sql.Timestamp"/>
+	<variable name="total_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="89" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="fc21a443-e0a7-4576-b1f5-3662b5c83fb2" x="0" y="30" width="572" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SDW Stringing Labor Charges]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dfed1a9d-cab6-4903-aec8-ce4fdc60942d" x="0" y="0" width="571" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NEGROS ORIENTAL ELECTRIC COOPERATIVE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8350c49e-1612-4802-944d-1e3630da1a1d" x="1" y="12" width="571" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bindoy, Negros Oriental]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement uuid="882e28b8-615c-421d-a769-f9570d188784" x="122" y="49" width="153" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{from}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement uuid="f86536f5-8d9a-4cd4-b8dd-a1c39e1b6898" x="296" y="49" width="161" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{to}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="4d0e3007-eb42-46fd-a778-52c16f445273" x="275" y="49" width="21" height="13"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[to]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a929b603-fbeb-447a-bdfe-15b7407dccba" x="0" y="0" width="70" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TransDate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="72b5556d-8556-4e85-9c17-bcc84fb47066" x="70" y="0" width="188" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consumer Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="89f81fbe-2e61-44da-9a94-97dab631d591" x="258" y="0" width="199" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0e3474b1-85f1-49cc-a40e-e77fddfe998e" x="457" y="0" width="114" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[F30 and 15% of SDW Cost in Excess]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="d20e8d7e-7ef3-4fa7-94ef-abf2376c0d55" x="0" y="26" width="571" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement uuid="f86cda96-5c62-4387-9fd2-ad3f5825ab02" x="70" y="0" width="188" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{AcctName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement uuid="24c53c0a-0809-443d-8a9f-86cec81d2570" x="0" y="0" width="70" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TransDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="31e7d80f-a7ae-4aa5-aa26-234ee8dacf84" x="258" y="0" width="199" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{AcctAddress}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="87d544a7-d9c8-42b2-bd2c-c51024348bc9" x="457" y="0" width="114" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="27" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement uuid="9c1c0aee-3cdf-478f-bc88-21a3e882b740" x="457" y="5" width="114" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="5cb5304c-6aeb-4ebe-b0b7-3e67e17d57c9" x="0" y="2" width="571" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
